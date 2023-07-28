@@ -39,16 +39,21 @@
               <!-- assembly line for making lists -->
             </ul>
             <div v-for="variant in variants" :key="variants.variant_id">
-              <p>{{variant.variant_color}}</p>
+              <p @mouseover="update_product(variant.variant_image)">{{variant.variant_color}}</p>
             </div>
             <div>
               <li v-for="size in sizes">{{ size }}</li>
             </div>
             <!-- <button class="button" v-on:click="cart += 1">Add to Cart</button> WE CAN REPLACE THE CALCULATION WITH A METHOD -->
             <button class="button" v-on:click="add_to_cart">Add to Cart</button>
+            
             <div class="cart">
               <p>Cart({{ cart }})</p>
             </div>
+            <div>
+              <button class="button" v-on:click="remove_item">Remove Item</button>
+            </div>
+          
           </div>
         </div>
       </div>

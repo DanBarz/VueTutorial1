@@ -12,11 +12,13 @@ const app = Vue.createApp({
             variants: [
                 {
                     variant_id: 2234,
-                    variant_color: 'green'
+                    variant_color: 'green',
+                    variant_image: './src/assets/socks_green.jpg'
                 },
                 {
                     variant_id: 2235,   
-                    variant_color: 'blue'
+                    variant_color: 'blue',
+                    variant_image: './src/assets/socks_blue.jpg'
                 }
             ],
             sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
@@ -29,5 +31,13 @@ const app = Vue.createApp({
     methods: {
         add_to_cart: function () {
             this.cart += 1
-        }}   
+        },
+        // we can use ESX Shorthand for the above function and it looks like this:
+        update_product(variant_image){
+            this.image = variant_image
+        },
+        remove_item:function () {
+            this.cart -= 1
+        }
+    }   
 })
