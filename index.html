@@ -26,8 +26,8 @@
             <h1>{{ product }}</h1>
             <p>{{ description }}</p>
             <p><a :href="url">click to Google</a></p>
-            <p v-if="inventory > 10">In Stock</p>
-            <p v-else-if="inventory < 10 && inventory > 0">Almost Sold Out</p>
+            <p v-if="inventory > 3">In Stock</p>
+            <p v-else-if="inventory < 4 && inventory > 0">Almost Sold Out</p>
             <p v-else>Out of Stock</p>
             <p v-show="on_sale">On Sale!</p>
             <p v-if="on_sale"><span style="color: red;">In Stock</span></p><!--do not need to mention true as it is true if it matches-->
@@ -38,14 +38,24 @@
               <li v-for="detail in details">{{ detail }}</li>
               <!-- assembly line for making lists -->
             </ul>
-            <div v-for="variant in variants" :key="variants.variant_id">
-              <p @mouseover="update_product(variant.variant_image)">{{variant.variant_color}}</p>
+            <div v-for="variant in variants" 
+              :key="variants.variant_id"
+              class="color-box"
+              :style="{ backgroundColor: variant.variant_color }" 
+              @mouseover="update_product(variant.variant_image)">
+              
             </div>
             <div>
               <li v-for="size in sizes">{{ size }}</li>
             </div>
             <!-- <button class="button" v-on:click="cart += 1">Add to Cart</button> WE CAN REPLACE THE CALCULATION WITH A METHOD -->
-            <button class="button" v-on:click="add_to_cart">Add to Cart</button>
+            <button 
+              class="button"
+              v-on:click="add_to_cart" 
+              :disabled="!inStock"
+              :class="{ disabledButton: !inStock }" 
+              >Add to Cart
+            </button>
             
             <div class="cart">
               <p>Cart({{ cart }})</p>

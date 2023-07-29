@@ -6,8 +6,9 @@ const app = Vue.createApp({
             description: "The most comfortable socks you will ever wear.",
             image: './src/assets/socks_blue.jpg',
             url: 'https://www.google.com/',
-            inventory: 8,
-            on_sale: false,
+            inStock: true,
+            inventory: 10,
+            on_sale: true,
             details: ['50% cotton', '30% wool', '20% polyester'],
             variants: [
                 {
@@ -31,6 +32,11 @@ const app = Vue.createApp({
     methods: {
         add_to_cart: function () {
             this.cart += 1
+            this.inventory -= 1
+            if (this.inventory == 0){
+                this.inStock = false
+                this.on_sale = false
+            }
         },
         // we can use ESX Shorthand for the above function and it looks like this:
         update_product(variant_image){
@@ -38,6 +44,12 @@ const app = Vue.createApp({
         },
         remove_item:function () {
             this.cart -= 1
+            this.inventory += 1
+            if (this.inventory > 0){
+                this.inStock = true
+                this.on_sale = true
+            }
         }
+        
     }   
 })
