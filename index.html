@@ -15,7 +15,7 @@
       <!-- <h1>{{ product }}</h1>
       <p>{{ description }}</p> -->
       <div class="nav-bar"></div>
-      
+      <div><h1>{{ title }}<h1></div>
       <div class="product-display">
         <div class="product-container">
           <div class="product-image">
@@ -28,7 +28,7 @@
             <p><a :href="url">click to Google</a></p>
             <p v-if="inventory > 3">In Stock</p>
             <p v-else-if="inventory < 4 && inventory > 0">Almost Sold Out</p>
-            <p v-else>Out of Stock</p>
+            <p v-else :class ="{ outofstock: !inStock }">Out of Stock</p>
             <p v-show="on_sale">On Sale!</p>
             <p v-if="on_sale"><span style="color: red;">In Stock</span></p><!--do not need to mention true as it is true if it matches-->
             <p v-else>This product is: <span style="color: rgb(0, 34, 255);">Out of Stock</span></p>
@@ -38,11 +38,11 @@
               <li v-for="detail in details">{{ detail }}</li>
               <!-- assembly line for making lists -->
             </ul>
-            <div v-for="variant in variants" 
+            <div v-for="(variant, index) in variants" 
               :key="variants.variant_id"
               class="color-box"
               :style="{ backgroundColor: variant.variant_color }" 
-              @mouseover="update_product(variant.variant_image)">
+              @mouseover="update_product(index)">
               
             </div>
             <div>
