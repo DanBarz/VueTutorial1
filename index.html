@@ -12,67 +12,17 @@
   <body>
     <!-- create our div to hold the app -->
     <div id="app">
-      <!-- <h1>{{ product }}</h1>
-      <p>{{ description }}</p> -->
       <div class="nav-bar"></div>
-      <div><h1>{{ title }}<h1></div>
-      <div class="product-display">
-        <div class="product-container">
-          <div class="product-image">
-            <img v-bind:src ="image">
-            <!-- HOW DO WE BIND IMAGE vbind directive -->
-          </div>
-          <div class="product-info">
-            <h1>{{ product }}</h1>
-            <p>{{ description }}</p>
-            <p><a :href="url">click to Google</a></p>
-            <p v-if="inventory > 3">In Stock</p>
-            <p v-else-if="inventory < 4 && inventory > 0">Almost Sold Out</p>
-            <p v-else :class ="{ outofstock: !inStock }">Out of Stock</p>
-            <p>{{ onSale }}</p>
-            <p v-if="on_sale"><span style="color: red;">In Stock</span></p><!--do not need to mention true as it is true if it matches-->
-            <p v-else>This product is: <span style="color: rgb(0, 34, 255);">Out of Stock</span></p>
-        
-
-            <ul>
-              <li v-for="detail in details">{{ detail }}</li>
-              <!-- assembly line for making lists -->
-            </ul>
-            <div v-for="(variant, index) in variants" 
-              :key="variants.variant_id"
-              class="color-box"
-              :style="{ backgroundColor: variant.variant_color }" 
-              @mouseover="update_product(index)">
-              
-            </div>
-            <div>
-              <li v-for="size in sizes">{{ size }}</li>
-            </div>
-            <!-- <button class="button" v-on:click="cart += 1">Add to Cart</button> WE CAN REPLACE THE CALCULATION WITH A METHOD -->
-            <button 
-              class="button"
-              v-on:click="add_to_cart" 
-              :disabled="!inStock"
-              :class="{ disabledButton: !inStock }" 
-              >Add to Cart
-            </button>
-            
-            <div class="cart">
-              <p>Cart({{ cart }})</p>
-            </div>
-            <div>
-              <button class="button" v-on:click="remove_item">Remove Item</button>
-            </div>
-          
-          </div>
-        </div>
+      <div class="cart">
+        <p>Cart({{ cart }})</p>
+        <product-display :premium="premium"></product-display>
       </div>
     </div>
-
-
   
     <!-- Import App -->
     <script src="./src/main.js"></script>
+    <!-- Import Component -->
+    <script src="./src/productDisplay.js"></script>
 
     <!-- Mount App -->
     <script>
