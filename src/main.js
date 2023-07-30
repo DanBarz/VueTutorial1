@@ -7,7 +7,6 @@ const app = Vue.createApp({
             product: "Socks",
             description: "The most comfortable socks you will ever wear.",
             url: 'https://www.google.com/',
-            inStock: true,
             selectedVariant: 0,
             inventory: 10,
             on_sale: true,
@@ -16,12 +15,14 @@ const app = Vue.createApp({
                 {
                     variant_id: 2234,
                     variant_color: 'green',
-                    variant_image: './src/assets/socks_green.jpg'
+                    variant_image: './src/assets/socks_green.jpg',
+                    variant_quantity: 10
                 },
                 {
                     variant_id: 2235,   
                     variant_color: 'blue',
-                    variant_image: './src/assets/socks_blue.jpg'
+                    variant_image: './src/assets/socks_blue.jpg',
+                    variant_quantity: 0
                 }
             ],
             sizes: ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'],
@@ -35,8 +36,9 @@ const app = Vue.createApp({
         add_to_cart: function () {
             this.cart += 1
             this.inventory -= 1
+            this.selectedInventory -= 1
+            console.log(this.selectedInventory)
             if (this.inventory == 0){
-                this.inStock = false
                 this.on_sale = false
             }
         },
@@ -48,8 +50,9 @@ const app = Vue.createApp({
         remove_item:function () {
             this.cart -= 1
             this.inventory += 1
+            this.selectedInventory += 1
+            console.log(this.selectedInventory)
             if (this.inventory > 0){
-                this.inStock = true
                 this.on_sale = true
             }
         }
@@ -63,6 +66,18 @@ const app = Vue.createApp({
 
         image() {
             return this.variants[this.selectedVariant].variant_image
+        },
+        inStock(){
+            return this.variants[this.selectedVariant].variant_quantity
+        },
+        onSale(){
+            if (this.on_sale){  
+                return this.brand + ' ' + this.product + ' are on sale!'
+            }
+            else{
+                return this.brand + ' ' + this.product + ' are not on sale!'
+            }
         }
+
     }
 })
