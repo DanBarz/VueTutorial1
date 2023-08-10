@@ -14,15 +14,18 @@
     <div id="app">
       <div class="nav-bar"></div>
       <div class="cart">
-        <p>Cart({{ cart }})</p>
-        <product-display :premium="premium"></product-display>
+        <product-display :premium="premium" @add-to-cart="update_cart" @remove-item="remove_item" :more_detail="more_detail"></product-display>
+        <p>Cart({{ cart.length }})</p>
       </div>
     </div>
   
     <!-- Import App -->
     <script src="./src/main.js"></script>
-    <!-- Import Component -->
+    <!-- Import Components -->
     <script src="./src/productDisplay.js"></script>
+    <script src="./src/reviewForm.js"></script>
+    <!-- Then head into product display and use the component -->
+    <script src="./src/reviewList.js"></script>
 
     <!-- Mount App -->
     <script>

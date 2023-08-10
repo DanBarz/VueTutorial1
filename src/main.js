@@ -2,15 +2,20 @@ const app = Vue.createApp({
 
 data(){
         return {
-            cart: 0,
+            cart: [],
             premium: true,
-            details: ['10% cotton', '10% wool', '80% polyester'],
+            more_detail: ['10% cotton', '10% wool', '80% polyester'], 
         };
 
        
     },
     methods: {
-        
+        update_cart(variant_id){
+        this.cart.push(variant_id)
+    },
+        remove_item (variant_id) {
+        this.cart.pop(variant_id)
+        }
     }
     
     
